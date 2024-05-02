@@ -1,0 +1,17 @@
+controller:
+  watchIngressWithoutClass: true
+  service:
+    loadBalancerClass: service.k8s.aws/nlb
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-name: k8s-nginx-int-${clusterShortName}
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+      service.beta.kubernetes.io/aws-load-balancer-ip-address-type: ipv4
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: true
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+      service.beta.kubernetes.io/aws-load-balancer-subnets: ${nlb_subnets}
+  ingressClassResource:
+    name: nginx-internal
+    enabled: true
+    default: true
+    controllerValue: "k8s.io/ingress-nginx-internal"

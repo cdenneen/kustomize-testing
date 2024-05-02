@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: PrefixSuffixTransformer
+metadata:
+  name: envSuffixer
+suffix: -internal
+fieldSpecs:
+  - path: spec/releaseName
+    kind: HelmRelease
+  - path: metadata/name
+    kind: HelmRelease
